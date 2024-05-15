@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const User = require('../Models/User.model')
 const createError = require('http-errors');
 const { authSchema } = require('../Helpers/validation_schema')
-
+const { signAccessToken } = require('../Helpers/jwt_helper')
 
 
 router.post('/register', async (req, res, next) => {
@@ -21,9 +21,9 @@ router.post('/register', async (req, res, next) => {
 
         const user = new User(result)
         const savedUser = await user.save()
+        const accessToken = await signAccessToken(savedUser.id)
 
-        res.send(savedUser)
-        
+        res.send({ accessToken })
     } catch(error) {
         if (error.isJoi == true) error.status = 422
         next(error)

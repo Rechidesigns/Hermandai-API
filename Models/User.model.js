@@ -19,7 +19,10 @@ const UserSchema = new Schema({
 UserSchema.pre('save', async function (next) {
     try {
         const salt = await bcrypt.genSalt(10)
-        console.log(this.email, this.password)
+        const hashedPassword = await bcrypt.hash( this.password, salt)
+        this.password = hashedPassword
+        next()
+        // console.log(this.email, this.password)
 
     } catch (error) {
         next(error)

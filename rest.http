@@ -8,7 +8,7 @@ POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-    "email": "Rechi4@gmail.com",
+    "email": "Rechi7@gmail.com",
     "password": "Alexwhite96"
 }
 ### refres token route
