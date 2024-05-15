@@ -1,0 +1,18 @@
+GET http://localhost:3000
+
+### login route
+POST http://localhost:3000/auth/login
+
+### register route
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "email": "Rechi4@gmail.com",
+    "password": "Alexwhite96"
+}
+### refres token route
+POST http://localhost:3000/auth/refresh-token
+
+### logout route
+DELETE http://localhost:3000/auth/logout
