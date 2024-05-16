@@ -2,13 +2,18 @@ GET http://localhost:3000
 
 ### login route
 POST http://localhost:3000/auth/login
+Content-Type: application/json
 
+{
+    "email": "Rechi17@gmail.com",
+    "password": "Alexwhite96"
+}
 ### register route
 POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-    "email": "Rechi7@gmail.com",
+    "email": "Rechi17@gmail.com",
     "password": "Alexwhite96"
 }
 ### refres token route
