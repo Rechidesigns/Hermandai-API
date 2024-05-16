@@ -1,11 +1,13 @@
+
 GET http://localhost:3000
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTU4NjIzNjEsImV4cCI6MTcxNTg2NTk2MSwiYXVkIjoiNjY0NWVlN2U2MmJkMGQwZmM3ZWJjN2JiIiwiaXNzIjoicmVjaGkuY29tIn0.ohsK1kdUGB-w2TBM-T1bpY_vOVvVqwNbhbGEEjBBvuI
 
 ### login route
 POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-    "email": "Rechi17@gmail.com",
+    "email": "Rechi18@gmail.com",
     "password": "Alexwhite96"
 }
 ### register route
@@ -13,7 +15,7 @@ POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-    "email": "Rechi17@gmail.com",
+    "email": "Rechi18@gmail.com",
     "password": "Alexwhite96"
 }
 ### refres token route
