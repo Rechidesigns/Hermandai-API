@@ -4,7 +4,10 @@ const morgan = require('morgan');
 const User = require('../Models/User.model')
 const createError = require('http-errors');
 const { authSchema } = require('../Helpers/validation_schema')
-const { signAccessToken } = require('../Helpers/jwt_helper')
+const { signAccessToken, 
+    signRefreshToken, 
+    // verifyAccessToken, 
+    verifyRefreshToken } = require('../Helpers/jwt_helper')
 
 
 router.post('/register', async (req, res, next) => {
@@ -19,8 +22,9 @@ router.post('/register', async (req, res, next) => {
         const user = new User(result)
         const savedUser = await user.save()
         const accessToken = await signAccessToken(savedUser.id)
+        const refreshToken = await signRefreshToken(savedUser.id)
 
-        res.send({ accessToken })
+        res.send({ accessToken, refreshToken })
     } catch(error) {
         if (error.isJoi == true) error.status = 422
         next(error)
@@ -41,14 +45,26 @@ router.post('/login', async (req, res, next) => {
         if (!isMatch) throw createError.Unauthorized('Incorrect password.');
 
         const accessToken = await signAccessToken(user.id);
-        res.send({ accessToken });
+        const refreshToken = await signRefreshToken(user.id);
+
+        res.send({ accessToken, refreshToken });
     } catch (error) {
         next(error);
     }
 });
 
 router.post('/refresh-token', async (req, res, next) => {
-    res.send("refresh token route")
+    try {
+        const { refreshToken } = req.body
+      if (!refreshToken) throw createError.BadRequest()
+      const userId = await verifyRefreshToken(refreshToken)
+
+      const accessToken = await signAccessToken(userId)
+      const refToken = await signRefreshToken(userId)
+      res.send({ accessToken: accessToken, refreshToken: refToken })
+    } catch (error) {
+        next(error)
+    }
 })
 
 router.delete('/logout', async (req, res, next) => {

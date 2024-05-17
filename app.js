@@ -4,9 +4,36 @@ const morgan = require('morgan')
 const createError = require('http-errors');
 require('dotenv').config()
 require('./helpers/init_mongodb')
+const { verifyAccessToken } = require('./Helpers/jwt_helper')
+
+// const client = require('./Helpers/init_redis');
+
+// client.on('ready', () => {
+//   console.log('Client connected to redis and ready to use...');
+
+//   // Set a value in Redis
+//   client.SET('foo', 'bar', (err) => {
+//     if (err) {
+//       console.log(err.message);
+//     } else {
+//       console.log('Value "bar" set successfully');
+      
+//       // Get the value from Redis
+//       client.GET('foo', (err, value) => {
+//         if (err) {
+//           console.log(err.message);
+//         } else {
+//           console.log('Value retrieved:', value);
+//           client.quit(); // Close the client after operations
+//         }
+//       });
+//     }
+//   });
+// });
 
 
 const AuthRoute = require("./Routes/Auth.route");
+// const client = require('./Helpers/init_redis');
 
 
 const app = express()
@@ -14,8 +41,7 @@ app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-app.get('/', async(req, res, next) => {
-    console.log(req.headers['authorization'])
+app.get('/', verifyAccessToken, async(req, res, next) => {
     res.send("Hello from express.")
 })
 
