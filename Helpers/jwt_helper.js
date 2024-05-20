@@ -73,6 +73,12 @@ module.exports = {
               if (err) return reject(createError.Unauthorized())
               const userId = payload.aud
 
+              // Check if refreshToken is blacklisted
+            //   if (invalidatedTokens.includes(refreshToken)) {
+            //     return reject(createError.Unauthorized('Refresh token invalidated'));
+            // }
+
+
               resolve(userId)
             //   client.GET(userId, (err, result) => {
             //     if (err) {

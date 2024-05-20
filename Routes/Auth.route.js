@@ -5,9 +5,11 @@ const User = require('../Models/User.model')
 const createError = require('http-errors');
 const { authSchema } = require('../Helpers/validation_schema')
 const { signAccessToken, 
-    signRefreshToken, 
-    // verifyAccessToken, 
+    signRefreshToken,  
     verifyRefreshToken } = require('../Helpers/jwt_helper')
+// const client = required('../Helpers/init_redis')
+
+const { isTokenBlacklisted, addToBlacklist } = require('../Helpers/tokenUtils');
 
 
 router.post('/register', async (req, res, next) => {
@@ -67,9 +69,43 @@ router.post('/refresh-token', async (req, res, next) => {
     }
 })
 
+// router.delete('/logout', async (req, res, next) => {
+//     try {
+//         const { refreshToken } = req.body
+//         if (!refreshToken) throw createError.BadRequest()
+//             const userId = await verifyRefreshToken(refreshToken)
+//         if (err) {
+//             console.log(err.message)
+//             throw createError.InternalServerError()
+//         }
+//         res.sendStatus(204)
+
+//         const refToken = await signRefreshToken(userId)
+//         res.destroy({ refreshToken: refToken })
+//     } catch (error) {
+//         next(error)
+//     }
+// })
+
+
 router.delete('/logout', async (req, res, next) => {
-    res.send("logout route")
-})
+    try {
+        const { refreshToken } = req.body;
+        if (!refreshToken) throw createError.BadRequest();
+
+        // Check if the refresh token is already blacklisted
+        if (isTokenBlacklisted(refreshToken)) {
+            throw createError.Unauthorized('Refresh token already invalidated');
+        }
+
+        // Add the refreshToken to the blacklist
+        addToBlacklist(refreshToken);
+
+        res.status(200).send('User logged out successfully');
+    } catch (error) {
+        next(error);
+    }
+});
 
 
 
