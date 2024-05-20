@@ -5,6 +5,8 @@ const createError = require('http-errors');
 require('dotenv').config()
 require('./helpers/init_mongodb')
 const { verifyAccessToken } = require('./Helpers/jwt_helper')
+require('./helpers/init_redis')
+// const client = require('./helpers/init_redis');
 
 // const client = require('./Helpers/init_redis');
 
@@ -33,10 +35,11 @@ const { verifyAccessToken } = require('./Helpers/jwt_helper')
 
 
 const AuthRoute = require("./Routes/Auth.route");
-// const client = require('./Helpers/init_redis');
-
-
 const app = express()
+
+
+
+
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
@@ -73,3 +76,4 @@ const PORT = process.env.PORT || 3000
 app.listen(PORT, () =>{
     console.log(`server runing on port ${PORT}`)
 })
+
