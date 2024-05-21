@@ -7,7 +7,7 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-    "email": "Rechi18@gmail.com",
+    "email": "Rechi19@gmail.com",
     "password": "Alexwhite96"
 }
 ### register route
@@ -15,7 +15,7 @@ POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-    "email": "Rechi22@gmail.com",
+    "email": "Rechi24@gmail.com",
     "password": "Alexwhite96"
 }
 ### refres token route
@@ -23,7 +23,7 @@ POST http://localhost:3000/auth/refresh-token
 Content-Type: application/json
 
 {
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTYyMjg2MTMsImV4cCI6MTc0Nzc4NjIxMywiYXVkIjoiNjY0NWVlN2U2MmJkMGQwZmM3ZWJjN2JiIiwiaXNzIjoicGlja3VycGFnZS5jb20ifQ.SP5k-hKEsWnzQOewbfZJA5EwHcO3VDss6R9Uk2AvFec"
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTYyNTgyMDIsImV4cCI6MTc0NzgxNTgwMiwiYXVkIjoiNjY0YzA1OWE4Y2QzNWY2NzZkYjMyMmJlIiwiaXNzIjoicGlja3VycGFnZS5jb20ifQ.p4Ww_dfPS2r8O-Z19HTD7ACIe0kPuu5wXw-LgLhHS6A"
 }
 
 ### logout route
@@ -31,5 +31,5 @@ DELETE http://localhost:3000/auth/logout
 Content-Type: application/json
 
 {
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTYyMjkwODAsImV4cCI6MTc0Nzc4NjY4MCwiYXVkIjoiNjY0NWVlN2U2MmJkMGQwZmM3ZWJjN2JiIiwiaXNzIjoicGlja3VycGFnZS5jb20ifQ.m61ZFkJkbdn-dGn9DAsJvbf1w5U3T-ObGlpYnEoxylI"
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTYyNTgyMzAsImV4cCI6MTc0NzgxNTgzMCwiYXVkIjoiNjY0YzA1OWE4Y2QzNWY2NzZkYjMyMmJlIiwiaXNzIjoicGlja3VycGFnZS5jb20ifQ.ZoR0A3MDjVjf3p912zRevwT-_ap11h6TaxBGkP6KCRE"
 }
